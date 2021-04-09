@@ -1,7 +1,6 @@
 [
-    {
-        "name" : "24-hour fitness center"
-    },
+    {"name" : "Indoor Pool"},
+    {"name" : "24-hour fitness center"},
     {"name" : "Massage therapy"},
     {"name" : "Full service spa"},
     {"name" : "Rooftop café  &amp; smoothie bar"},

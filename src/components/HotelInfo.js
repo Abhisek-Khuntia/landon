@@ -1,9 +1,32 @@
-import React from 'react'
-import services from './data/services.json'
-import accessibilitiyData from './data/accessibiltiesData.json'
+import React,{useState, useEffect} from 'react'
+// import services from './data/services.json'
+// import accessibilitiyData from './data/accessibilities.json'
+
 
 
 const HotelInfo = () => {
+
+
+  const [servicesData,setServicesData] = useState([])
+  const [accessibilitiyData,setAccessibilitiyData] = useState([])
+
+  const loadServicesData= async() => {
+        const res = await fetch('https://lool8fybla.execute-api.us-east-2.amazonaws.com/Production/services')
+        const data = await res.json();
+        setServicesData(data)
+      }
+  const loadAccessibilityData= async() => {
+        const res = await fetch('https://lool8fybla.execute-api.us-east-2.amazonaws.com/Production/accessibilities')
+        const data = await res.json();
+        setAccessibilitiyData(data)
+      }
+
+        useEffect(() => {
+          loadServicesData()
+          loadAccessibilityData()
+         }, [])
+
+
     return (
         <div className="scene" id="hotelinfo">
          
@@ -27,7 +50,7 @@ const HotelInfo = () => {
             <p>Our services and amenities are designed to make your travel easy, your stay comfortable, and your experience one-of-a-kind.</p>
             <ul>
               {
-              services.map((service)=>
+              servicesData.map((service)=>
               <li>{service.name}</li>
               )
               }

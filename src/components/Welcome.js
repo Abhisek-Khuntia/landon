@@ -1,12 +1,27 @@
-import React from 'react'
-import imageLinks from './data/gallery_images.json'
+import React,{useState, useEffect} from 'react'
+// import imageLinks from './data/gallery_images.json'
 const Welcome = () => {
+
+  const [galleryImagesData, setGalleryImagesData] = useState([])
+
+  const loadGalleryImagesData = async()=>{
+
+    const res = await fetch('https://lool8fybla.execute-api.us-east-2.amazonaws.com/Production/gallery_images')
+    const data = await res.json();
+    setGalleryImagesData(data)
+  }
+
+  useEffect(() => {
+    loadGalleryImagesData()
+   },[]);
+
+
     return (
         <div className="scene" id="welcome">
         <article className="content">
           <div className="gallery">
             {
-              imageLinks.map((items)=>
+              galleryImagesData.map((items)=>
               <img className={items.className} src={items.src} alt={items.alt}/>
               )
             }
@@ -17,6 +32,6 @@ const Welcome = () => {
         </article>
       </div>
     )
-}
 
+}
 export default Welcome
